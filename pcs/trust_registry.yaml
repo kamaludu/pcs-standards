@@ -1,0 +1,10 @@
+# TRUST REGISTRY UFFICIALE (SOP-PCS-001 Rev. 3.5.1 Sez. 16.5.1)
+# Delimitazione: Trust Anchor interno a Commit A; richiede ancoraggio esterno per trust di terzi.
+trust_registry_version: "1.0.0"
+registry_mode: "AUTHORITATIVE"
+authorized_identities:
+  - entity_id: "MAINTAINER-ROOT-01"
+    role: "DEVELOPER"
+    public_key_ed25519: "dc3886713545fe0b5828947d0cfd33cd445522a88020e3025d6588f564c269e2"
+    valid_from: "2026-08-28T00:00:00Z"
+    valid_to: "2036-08-28T23:59:59Z"

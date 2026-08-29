@@ -1,0 +1,218 @@
+# ==============================================================================
+# File: pcs/blueprint.yaml
+# Descrizione: Project System Blueprint ufficiale dell'archivio PCS Standards
+# ==============================================================================
+blueprint_schema_version: "1.0.0"
+blueprint_id: "PCS-PSB-STANDARDS-001"
+blueprint_type: "ROOT_ARCHIVE_INSTANCE"
+project_name: "pcs-standards"
+project_title: "PCS Standards & Normative Core Archive"
+revision: "Rev. 12.7.3"
+created_at_utc: "2026-08-28T00:00:00Z"
+
+normative_binding:
+  pcs_version: "4.5"
+  pcs_document_path: "core/PCS.md"
+  pcs_document_hash: "sha256:185556d5987cc9852bea696344666bf1ea48d7872f33a85757b9506fecad49de"
+  sop_version: "3.5.1"
+  sop_document_path: "core/PCS-SOP.md"
+  sop_document_hash: "sha256:d599dc9e93204eb5148acc7fd8528e9c94265836b9cb2d7cba5ab2dd9222326a"
+  manifest_path: "pcs/manifest.json"
+  trust_registry_path: "pcs/trust_registry.yaml"
+  trust_registry_mode: "AUTHORITATIVE"
+
+target_system_description:
+  purpose: "Conservazione a lungo termine, versionamento agnostico e auto-attestazione tecnica del corpus normativo PCS 4.5 e SOP-PCS-001 Rev. 3.5.1."
+  nature: "Archivio documentale statico. Il sito web e un artefatto derivato; la fonte di verita risiede nel repository Git agnostico."
+  preservation_strategy: "Minimizzazione dipendenze e formati aperti non proprietari (UTF-8 Markdown, Strict YAML, JSON)."
+  null_field_semantic_policy: "Per i parametri non applicabili ad archivio statico R1 (image_digest, model_hash), serializzazione letterale JSON null RFC 8785 con semantica di non-applicabilita formale (assert deployment_class == R1). Il campo lock_hash traccia requirements.lock."
+  runtime_environment_observation_policy: "Per classe dichiarata R1 / livello C2, environment_profile rappresenta un'osservazione runtime e non un'attestazione TPM hardware."
+  source_commit_sha_policy: "In sealed production release mode, source_commit_sha must be a non-zero 40-character hexadecimal git commit hash representing Commit A and must be a reachable ancestor of HEAD."
+  lockfile_integrity_policy: "Every dependency in requirements.lock must be pinned with at least one sha256 hash."
+  trust_registry_dual_integrity_policy: "Trust Registry integrity is verified via two complementary bindings: raw file sha256 in manifest.bound_asset_hashes and canonicalized JCS data model sha256 in ConfigurationIdentity."
+
+tcb_and_frozen_assets_model:
+  frozen_project_assets_count: 7
+  pinned_dependency_lock_count: 1
+  environmental_assumptions_count: 3
+  tcb_distinction_rule: "FrozenAssets != CompleteTCB (La conformita crittografica dei 7 asset di progetto e del lockfile non equivale a prova d'identita dell'intero host)"
+
+trust_dag_and_invariants:
+  dag_topology: "Acyclic(DAG_trust) == TRUE"
+  provenance_sequence: "Commit_A (Frozen Snapshot) -> Sealer -> Evidence Merkle v1 + Signature -> Commit_B (Release) -> Cold Verifier"
+  enforced_invariants:
+    invariant_1_seal_inputs_origin: "seal_inputs subset FileSet(Commit_A)"
+    invariant_2_seal_outputs_disjoint: "seal_outputs intersect FrozenProjectAssets == empty_set"
+    invariant_3_diff_confinement: "(FileSet(Commit_B) \\ FileSet(Commit_A)) subset AllowedDerivedArtifacts"
+    invariant_4_verifier_no_mutation: "VerifierOutputs == empty_set (Read-Only / No-Mutation Invariant)"
+    invariant_5_verifier_idempotence: "Snapshot_after == Snapshot_before AND Verdict(Run_1) == Verdict(Run_2) == PASS"
+  allowed_derived_artifacts:
+    - "pcs/manifest.json"
+    - "pcs/signatures/evidence-package.sig"
+    - "pcs/reports/preflight-gate-log.json"
+    - "pcs/evidence/EV-0001.json"
+    - "pcs/evidence/EV-0002.json"
+    - "pcs/evidence/EV-0003.json"
+    - "pcs/evidence/EV-0004.json"
+    - "pcs/evidence/EV-0005.json"
+    - "pcs/evidence/EV-0006.json"
+    - "pcs/evidence/EV-0007.json"
+    - "pcs/evidence/EV-0008.json"
+    - "pcs/evidence/EV-0009.json"
+    - "pcs/evidence/EV-0010.json"
+    - "pcs/evidence/EV-0011.json"
+    - "pcs/evidence/EV-0012.json"
+    - "pcs/evidence/EV-0013.json"
+    - "pcs/evidence/EV-0014.json"
+    - "pcs/evidence/EV-0015.json"
+    - "pcs/evidence/EV-0016.json"
+    - "pcs/evidence/EV-0017.json"
+
+corpus_equivalence_model:
+  equivalence_assertion: "ACTUAL_CORPUS == EXPECTED_CORPUS"
+  forensic_scan_policy: "FAIL-CLOSED on symlinks, FIFOs, sockets, device nodes, or unaccounted files"
+  expected_spec_files: "empty_set (or explicitly enumerated in specifications/)"
+
+app_hash_specification:
+  algorithm: "SHA-256(JCS({\"builder_sha256\": builder_sha256, \"pcs_lib_sha256\": pcs_lib_sha256, \"verifier_sha256\": verifier_sha256}))"
+  framing: "RFC 8785 JSON Canonicalization Scheme"
+
+yaml_grammar_specification:
+  grammar_id: "PCS-STRICT-YAML-v1.0"
+  definition: "Deliberately restricted JSON-compatible YAML subset rejecting inputs outside strict key-value and sequence mappings."
+  positive_vectors_count: 10
+  negative_vectors_count: 3
+
+provenance_model:
+  human_declared:
+    domain_class_r:
+      value: "R1"
+      provenance: "HUMAN_DECLARED"
+      epistemic_limitation: "Classificazione d'uso iniziale dichiarata; non costituisce perizia oggettiva."
+      machine_consistency_check:
+        rule_id: "RULE-SCOPE-R1-001"
+        target_property: "Zero occorrenze pattern backend/database nel codice sorgente"
+        observed_result: "PASS"
+    severity_index_s:
+      value: "S2"
+      provenance: "HUMAN_DECLARED"
+      epistemic_limitation: "Stima soggettiva della magnitudo del danno potenziale nello scenario peggiore; non costituisce perizia empirica."
+    irreversibility_index_ir:
+      value: "IR1"
+      provenance: "HUMAN_DECLARED"
+      epistemic_limitation: "Stima soggettiva dell'onere di ripristino; non costituisce perizia empirica."
+    scope_delimitation: "L'archivio pubblica standard riproducibili. Zero servizi transazionali, zero moduli decisionali/LLM, zero dati personali ex Art. 9/10 GDPR."
+    explicit_non_purposes:
+      - "NON costituisce piattaforma chiusa o vincolata a singolo fornitore (sorgente agnostica)."
+      - "NON eroga pareri legali o certificazioni di conformita autonoma per alcuna giurisdizione (PCS-L4.5)."
+      - "NON esegue modelli linguistici o agenti generativi decisionali autonomi a runtime."
+      - "NON raccoglie ne profila dati di navigazione, cookie o identificativi di terzi."
+  
+  derived_parameters:
+    gating_index_k: 2
+    formula_k: "max(S, IR) = max(2, 1) = 2"
+    minimum_control_c_min: "C2"
+    implemented_control_c: "C2"
+    poset_evaluation: "ord(C2) >= ord(C2) -> TRUE"
+    contradiction_blocked_state: false
+    audit_c4_required: false
+
+rtm_cardinality_invariant:
+  req_count: 18
+  predicate_count: 17
+  evidence_record_count: 17
+  mapping_rule: "The surjective mapping f: REQ -> PREDICATE contains exactly one many-to-one mapping: {PCS-REQ-02, PCS-REQ-03} -> P_K_CALC (EV-0002). All remaining 16 requirements map 1:1."
+
+rule_sets_declared:
+  rule_scope_r1:
+    rule_id: "RULE-SCOPE-R1-001"
+    version: "1.0.0"
+    target: "Zero importazioni corrispondenti ai pattern backend/database e zero chiamate dinamiche vietate"
+  rule_dtm_r:
+    rule_id: "RULE-DTM-R-001"
+    version: "1.0.0"
+    target: "Zero importazioni corrispondenti ai pattern client di rete nel codice python"
+  rule_llm:
+    rule_id: "RULE-LLM-001"
+    version: "1.0.0"
+    target: "Zero importazioni corrispondenti ai pattern moduli generativi/LLM nel repository"
+  rule_comm_gov:
+    rule_id: "RULE-COMM-GOV-001"
+    version: "1.0.0"
+    target: "Zero importazioni corrispondenti a pattern di egress, webhook o canali esterni nel perimetro ispezionato"
+  rule_data_gov:
+    rule_id: "RULE-DATA-GOV-001"
+    version: "1.0.0"
+    target: "Zero corrispondenze per i pattern secret noti configurati su file e git log"
+  rule_metadata:
+    rule_id: "RULE-METADATA-001"
+    version: "1.0.0"
+    target: "Zero corrispondenze per pattern percorsi host assoluti (/home/..., C:\\...) in files e git log"
+  rule_spec_isol:
+    rule_id: "RULE-SPEC-ISOL-001"
+    version: "1.0.0"
+    target: "Zero file binari o estensioni eseguibili non autorizzate nella directory specifications/"
+  rule_doc_integrity:
+    rule_id: "RULE-DOC-INTEGRITY-001"
+    version: "1.0.0"
+    target: "Impronte crittografiche SHA-256 dei testi normativi core PCS e SOP conformi"
+  rule_legal_doc:
+    rule_id: "RULE-LEGAL-DOC-001"
+    version: "1.0.0"
+    target: "Presenza fisica degli artefatti documentali LICENSE (GPLv3) e README.md (PCS-L4.5)"
+  rule_sig_trap:
+    rule_id: "RULE-SIG-TRAP-001"
+    version: "1.0.0"
+    target: "Registrazione e operativita attiva degli handler OS per SIGINT e SIGTERM"
+
+universal_threat_model_coverage:
+  utm_t0:
+    threat_name: "Protocol/Logical Failure & Compliance Illusion"
+    assurance_stage: "A5_CTRL_PASS"
+  utm_t1:
+    threat_name: "Legal Asymmetric / SLAPP & Copyright"
+    assurance_stage: "A5_CTRL_PASS"
+  utm_t2:
+    threat_name: "Regulatory & Compliance Risk (GDPR/AI Act)"
+    assurance_stage: "A5_CTRL_PASS"
+  utm_t3:
+    threat_name: "Correlation & Maintainer De-anonymization"
+    assurance_stage: "A5_CTRL_PASS"
+  utm_t4:
+    threat_name: "Malfunctioning & Build Failure"
+    assurance_stage: "A5_CTRL_PASS"
+  utm_t5:
+    threat_name: "Automated External Communication Surface & Egress Exposure"
+    assurance_stage: "A5_CTRL_PASS"
+
+preflight_gate_matrix:
+  schema_version: "1.0.0"
+  predicates:
+    p_dtm_remote:
+      evaluation_state: "N/A"
+      na_reason_code: "NO_REMOTE_SERVICE"
+      na_justification: "Archivio statico offline privo di client HTTP o servizi remoti."
+    p_allowlist:
+      evaluation_state: "N/A"
+      na_reason_code: "NO_LLM_MODULE"
+      na_justification: "Archivio documentale statico privo di componenti decisionali o interpreti FSM."
+    p_llm_isol:
+      evaluation_state: "N/A"
+      na_reason_code: "NO_LLM_MODULE"
+      na_justification: "Nessun modello linguistico o generativo integrato nel repository."
+    p_contract:
+      evaluation_state: "N/A"
+      na_reason_code: "NO_LLM_MODULE"
+      na_justification: "Non applicabile ad archivio statico privo di output probabilistici."
+    p_dual_fail:
+      evaluation_state: "N/A"
+      na_reason_code: "NO_LLM_MODULE"
+      na_justification: "Archivio privo di memoria di sessione o contesti conversazionali."
+    p_c4_audit:
+      evaluation_state: "N/A"
+      na_reason_code: "CONTROL_LEVEL_NOT_APPLICABLE"
+      na_justification: "Il sistema opera in classe dichiarata R1 con livello C2. L'audit C4 e riservato ad R3/K=3."
+
+lifecycle_and_invalidation:
+  ttl_days: 365
+  ttl_expiration_utc: "2027-08-28T00:00:00Z"

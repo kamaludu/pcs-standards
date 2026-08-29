@@ -1,0 +1,14 @@
+# Protezione chiavi crittografiche private
+.keys/
+*.pem
+*.key
+
+# Output derivati della compilazione statica
+_site/
+
+# Runtime Python ed editor
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store

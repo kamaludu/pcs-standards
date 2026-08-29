@@ -1,0 +1,54 @@
+name: PCS Standards Verification and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  verify-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository (Read-Only)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python Runtime (CPython 3.12 Reference)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pinned Dependencies (DTM-L Lockfile)
+        run: pip install --require-hashes -r requirements.lock
+
+      - name: Run Deterministic Cold Self-Verification
+        run: python3 toolchain/verify_autonomous.py
+
+      - name: Run Deterministic Gate & Build
+        run: python3 toolchain/builder.py
+
+      - name: Setup GitHub Pages Adapter
+        uses: actions/configure-pages@v5
+
+      - name: Upload Static Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

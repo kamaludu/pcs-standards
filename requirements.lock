@@ -1,0 +1,16 @@
+# ==============================================================================
+# File: requirements.lock
+# Descrizione: Lockfile deterministico DTM-L per la toolchain PCS (Rev. 12.7.3)
+# ==============================================================================
+cryptography==43.0.0 \
+    --hash=sha256:cb013933d4c127349b3948aa8aaf2f12c0353ad0eccd715ca789c8a0f671646f \
+    --hash=sha256:4a8069ff32a514d2e8b0ca4bb049079a0b806d20cc17e887f87bf4c547fb7e46 \
+    --hash=sha256:d8b2e5971a69a4d87da74b0be45bfbf8b671b56a59600e1e699be061405e3f32
+cffi==1.17.0 \
+    --hash=sha256:eb862356ee9391dc5a0b3cbc00f416b48c1b9a52d252d898e5b7696a5f9fe150 \
+    --hash=sha256:39f77e64b85c13fb590b56b3e3fcbf70ff120f269389f46fa0137d686f34eb46 \
+    --hash=sha256:0d536c4b281eb2eb54238e8dd053075d9e5b561c94488344607be7b275213606
+pycparser==2.22 \
+    --hash=sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc \
+    --hash=sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6
+
