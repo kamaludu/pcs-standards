@@ -1,10 +1,10 @@
 {
   "manifest_version": "1.0.0",
-  "created_at_utc": "2026-08-29T13:53:55Z",
-  "source_commit_sha": "5393ae0833b87478ca1d0939def6645430f3d303",
+  "created_at_utc": "2026-08-29T16:28:24Z",
+  "source_commit_sha": "4348ed64ac376b2582b87315dd688477c9218bd0",
   "project_name": "pcs-standards",
   "configuration_identity": "sha256:daa521ef5c8923f630288b3d6c0a7391409f7aec8dc6e651e10d88bc44ffb7ef",
-  "merkle_root_v1": "af9815b22608cdf173459b9a7ea129850e9739ee6cc2d33c98cc9eb22b58d8e8",
+  "merkle_root_v1": "88c11bd08f5f4fba18bef4efb2dc9211184225b1344711de3c46ea9d7ee17c72",
   "bound_asset_hashes": {
     "pcs_core_sha256": "185556d5987cc9852bea696344666bf1ea48d7872f33a85757b9506fecad49de",
     "sop_core_sha256": "d599dc9e93204eb5148acc7fd8528e9c94265836b9cb2d7cba5ab2dd9222326a",
