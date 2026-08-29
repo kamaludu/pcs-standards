@@ -1,0 +1,132 @@
+{
+  "timestamp_utc": "2026-08-29T13:53:55Z",
+  "commit_sha": "5393ae0833b87478ca1d0939def6645430f3d303",
+  "runner_version": "pcs-builder-v12.7.3",
+  "merkle_root_v1": "af9815b22608cdf173459b9a7ea129850e9739ee6cc2d33c98cc9eb22b58d8e8",
+  "configuration_identity": "sha256:daa521ef5c8923f630288b3d6c0a7391409f7aec8dc6e651e10d88bc44ffb7ef",
+  "evidence_result": "PASS",
+  "gate_verdict": "RELEASE_GATE_PASS",
+  "scope_assurance": "C2_INTERNAL_GATE_CONFORMANCE_DEMONSTRATED_WITHIN_DECLARED_BOUNDARY",
+  "attestation_id": "PCS-C2-SELF-ATTESTATION-v1.0",
+  "predicates_result": {
+    "P_SCOPE_OK": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "RULE-SCOPE-R1-001 PASS: 0 corrispondenze backend/database e 0 chiamate dinamiche vietate"
+    },
+    "P_K_CALC": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "K_calc=2, K_decl=2 (Joint mapping PCS-REQ-02/03)"
+    },
+    "P_CTRL_MATCH": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "C_impl=C2 >= C_min=C2"
+    },
+    "P_NO_BLOCK": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "Nessuna contraddizione logica"
+    },
+    "P_THREAT_MOD": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "Stadio A5 (Bounded Control Pass) su 6/6 classi UTM"
+    },
+    "P_T0_TEST": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "Integrit\u00e0 documentale confermata contro Blueprint"
+    },
+    "P_LEGAL_DOC": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "Requisiti documentali soddisfatti: Licenza Open Source verificata (GNU GPL); PCS-L4.5 (True)"
+    },
+    "P_DTM_LOCAL": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "RULE-SPEC-ISOL-001 PASS: Isolamento directory specifications/ verificato (0 estensioni vietate); DTM-L Lockfile conforme (3 pacchetti verificati con vincolo hash per-package)"
+    },
+    "P_DTM_REMOTE": {
+      "state": "N/A",
+      "eval": true,
+      "code": "NO_REMOTE_SERVICE",
+      "just": "Archivio statico offline privo di client HTTP o servizi remoti.",
+      "detail": "RULE-DTM-R-001 PASS: 0 corrispondenze per pattern client di rete nel perimetro ispezionato"
+    },
+    "P_DATA_GOV": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "RULE-DATA-GOV-001 PASS: 0 pattern secret rilevati dai detector configurati (eseguita su repository completo (reachable Git history))"
+    },
+    "P_METADATA": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "RULE-METADATA-001 PASS: 0 corrispondenze per percorsi host assoluti in files e reachable git history (eseguita su repository completo (reachable Git history))"
+    },
+    "P_ALLOWLIST": {
+      "state": "N/A",
+      "eval": true,
+      "code": "NO_LLM_MODULE",
+      "just": "Archivio documentale statico privo di componenti decisionali o interpreti FSM.",
+      "detail": "N/A validato da RULE-LLM-001"
+    },
+    "P_LLM_ISOL": {
+      "state": "N/A",
+      "eval": true,
+      "code": "NO_LLM_MODULE",
+      "just": "Nessun modello linguistico o generativo integrato nel repository.",
+      "detail": "RULE-LLM-001 PASS: 0 corrispondenze per pattern moduli generativi/LLM nel perimetro ispezionato"
+    },
+    "P_CONTRACT": {
+      "state": "N/A",
+      "eval": true,
+      "code": "NO_LLM_MODULE",
+      "just": "Non applicabile ad archivio statico privo di output probabilistici.",
+      "detail": "N/A validato da RULE-LLM-001"
+    },
+    "P_DUAL_FAIL": {
+      "state": "N/A",
+      "eval": true,
+      "code": "NO_LLM_MODULE",
+      "just": "Archivio privo di memoria di sessione o contesti conversazionali.",
+      "detail": "N/A validato da RULE-LLM-001"
+    },
+    "P_C4_AUDIT": {
+      "state": "N/A",
+      "eval": true,
+      "code": "CONTROL_LEVEL_NOT_APPLICABLE",
+      "just": "Il sistema opera in classe dichiarata R1 con livello C2. L'audit C4 e riservato ad R3/K=3.",
+      "detail": "N/A per livello di controllo C2"
+    },
+    "P_ABORT_OFF": {
+      "state": "TRUE",
+      "eval": true,
+      "code": null,
+      "just": null,
+      "detail": "RULE-SIG-TRAP-001 PASS: Signal handler OS attivamente verificati nel runtime"
+    }
+  }
+}
