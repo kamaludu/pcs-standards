@@ -1,9 +1,5 @@
 # PCS Standards & Normative Core Archive
 
-> *«Ecco, io vi mando come pecore in mezzo ai lupi; siate dunque prudenti come i serpenti e semplici come le colombe.»* (Mt 10, 16)  
->
-> *«Behold, I am sending you like sheep in the midst of wolves; so be shrewd as serpents and simple as doves.»* (Mt 10, 16)
-
 Archivio normativo ufficiale del **Protocollo Colomba Serpente (PCS 4.5)** e delle relative specifiche tecniche e procedurali collegate.
 
 ---
