@@ -27,8 +27,6 @@
 
 ## 0. PREAMBOLO ASSIOMATICO E GERARCHIA DOCUMENTALE
 
-> *«Ecco, io vi mando come pecore in mezzo ai lupi; siate dunque prudenti come i serpenti e semplici come le colombe.»* (Mt 10, 16)
-
 Il presente protocollo costituisce il **nucleo normativo (Normative Core)** per concepire, sviluppare, collaudare e distribuire artefatti software, rilevazioni metrologiche e strumenti ad accesso pubblico.
 
 L'obiettivo primario è **massimizzare l'utilità tecnica e sociale dell'opera minimizzando la superficie di attacco, contenendo il danno massimo potenziale e garantendo la degradazione sicura del sistema**, a tutela dell'autore, degli utenti, dei terzi e dell'integrità del progetto.
