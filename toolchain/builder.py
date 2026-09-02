@@ -19,6 +19,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR / "toolchain"))
 
@@ -124,6 +125,16 @@ def eval_all_predicates(bp: dict, observed_hashes: dict) -> dict:
     sop_bind_hash = str(bp_bind.get("sop_document_hash") or "").replace("sha256:", "")
     t0_ok = (pcs_bind_hash == observed_hashes["pcs_core_sha256"]) and (sop_bind_hash == observed_hashes["sop_core_sha256"])
 
+    t0_detail = (
+        "Integrità documentale confermata contro Blueprint"
+        if t0_ok
+        else (
+            "Mismatch hash normativi: "
+            f"PCS.md (bp={pcs_bind_hash[:8]}..., real={observed_hashes['pcs_core_sha256'][:8]}...), "
+            f"SOP.md (bp={sop_bind_hash[:8]}..., real={observed_hashes['sop_core_sha256'][:8]}...)"
+        )
+    )
+
     scans = audit_empirical_scans(ROOT_DIR)
 
     h_int = signal.getsignal(signal.SIGINT)
@@ -143,7 +154,7 @@ def eval_all_predicates(bp: dict, observed_hashes: dict) -> dict:
         "P_CTRL_MATCH": {"state": "TRUE", "eval": (c_min != "BLOCKED" and c_poset.get(c_impl, -1) >= c_poset.get(c_min, 99)), "code": None, "just": None, "detail": f"C_impl={c_impl} >= C_min={c_min}"},
         "P_NO_BLOCK":   {"state": "TRUE", "eval": not (r_val in ["R0", "R1", "R2"] and k_calc == 3), "code": None, "just": None, "detail": "Nessuna contraddizione logica"},
         "P_THREAT_MOD": {"state": "TRUE", "eval": utm_ok and scans["comm_ok"], "code": None, "just": None, "detail": "Stadio A5 (Bounded Control Pass) su 6/6 classi UTM"},
-        "P_T0_TEST":    {"state": "TRUE", "eval": t0_ok, "code": None, "just": None, "detail": "Integrità documentale confermata contro Blueprint"},
+        "P_T0_TEST":    {"state": "TRUE", "eval": t0_ok, "code": None, "just": None, "detail": t0_detail},
         "P_LEGAL_DOC":  {"state": "TRUE", "eval": (lic_ok and readme_ok), "code": None, "just": None, "detail": f"Requisiti documentali soddisfatti: {lic_detail}; PCS-L4.5 ({readme_ok})"},
         "P_DTM_LOCAL":  {"state": "TRUE", "eval": dtm_local_ok, "code": None, "just": None, "detail": dtm_local_detail},
         "P_DTM_REMOTE": {"state": "N/A", "eval": scans["net_ok"], "code": p_dtm_r_code, "just": p_dtm_r_just, "detail": scans["net_msg"]},
@@ -351,6 +362,8 @@ def build_static_site():
       <li><a href="core/sop.html"><strong>SOP-PCS-001 Rev. 3.5.1</strong></a> — Metrologia e Pipeline di Gate a 5 Fasi.</li>
       <li><a href="specifications/index.html"><strong>Corpus Specifiche Figlie</strong></a> — Specifiche collegate.</li>
     </ul>
+    <h3>Repository e Trasparenza:</h3>
+    <p>Codice sorgente, toolchain e attestazioni crittografiche disponibili su: <a href="https://github.com/kamaludu/pcs-standards/" target="_blank" rel="noopener noreferrer">GitHub (kamaludu/pcs-standards)</a>.</p>
     """
     with open(SITE_DIR / "index.html", "w", encoding="utf-8") as f:
         f.write(wrap_page("Home", home_content, ""))

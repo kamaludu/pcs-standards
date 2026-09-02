@@ -13,7 +13,7 @@ created_at_utc: "2026-08-28T00:00:00Z"
 normative_binding:
   pcs_version: "4.5"
   pcs_document_path: "core/PCS.md"
-  pcs_document_hash: "sha256:185556d5987cc9852bea696344666bf1ea48d7872f33a85757b9506fecad49de"
+  pcs_document_hash: "sha256:da3758ee539e052b4b5b8f737091d83a1bdb6729622922d3f17ec9fd056da0d9"
   sop_version: "3.5.1"
   sop_document_path: "core/PCS-SOP.md"
   sop_document_hash: "sha256:d599dc9e93204eb5148acc7fd8528e9c94265836b9cb2d7cba5ab2dd9222326a"
