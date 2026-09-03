@@ -1,9 +1,9 @@
 {
-  "timestamp_utc": "2026-09-03T16:50:40Z",
-  "commit_sha": "2ea6d32fab88f1cd3ca02f55f4a66ac993b5ed8d",
+  "timestamp_utc": "2026-09-03T17:44:55Z",
+  "commit_sha": "10654f6204fb10b3e5b119342254062fde58abb3",
   "runner_version": "pcs-builder-v12.7.3",
-  "merkle_root_v1": "8b35ff19d4b5181f7ae5c95789b450068c89b1853c849bdd3059db2a37099e4d",
-  "configuration_identity": "sha256:54dcf996a480d154867b0f0fce8575f2d0bd1139ef9d87a5a395d6806039b003",
+  "merkle_root_v1": "8c9150a2ef256b963ac176c75b649b1dd85b5d4d3df5134e89ba29b5717f9e16",
+  "configuration_identity": "sha256:d9f061507c6bd147c46bf0a5ec6387b14c4ae5b3f03d24e2a53de7ed3af44d0a",
   "evidence_result": "PASS",
   "gate_verdict": "RELEASE_GATE_PASS",
   "scope_assurance": "C2_INTERNAL_GATE_CONFORMANCE_DEMONSTRATED_WITHIN_DECLARED_BOUNDARY",
