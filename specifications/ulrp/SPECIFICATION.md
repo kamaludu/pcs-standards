@@ -1,3 +1,4 @@
+```text
 ================================================================================
 SPECIFICA TECNICA NORMATIVA: ULRP-SPEC-1.6.27
 UNIVERSAL LLM-SAFE REVERSIBLE PARTITIONING AND PREPROCESSING PROTOCOL
@@ -7,6 +8,7 @@ Status    : APPROVED NORMATIVE SPECIFICATION (v1.6.27 - FROZEN STANDARD)
 Reference : Protocollo Colomba Serpente (PCS 4.5)
 Scope     : Strictly Language-Agnostic, Runtime-Agnostic, OS-Agnostic, LLM-Agnostic
 ================================================================================
+```
 
 ## 0. CONVENZIONI, MODELLO DI CONFORMITA', MODELLO DI MINACCIA E AMBITO OSSERVABILE
 
@@ -1078,6 +1080,9 @@ Una suite di test di conformita' valida con successo i seguenti 15 scenari deter
 * F14 (Ordinamento Multi-File): Ingestione percorsi non ordinati ("b/file.txt", "a/file.txt"). Ordinamento lessicografico byte-a-byte in manifest.files e manifest.chunks.
 * F15 (Isolamento TokenType): Token con medesimo TokenID ma diverso TokenType. Rilevamento mapping conflict conforme a Sezione 2.5 (Errore 22).
 
+```text
 ================================================================================
 FINE SPECIFICA TECNICA NORMATIVA ULRP-SPEC-1.6.27 (FROZEN STANDARD)
 ================================================================================
+```
+

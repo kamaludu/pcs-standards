@@ -1,3 +1,4 @@
+```text
 ================================================================================
 SPECIFICA TECNICA NORMATIVA: ULRP-EXT-SPEC-1.1.0
 UNIVERSAL LLM SEMANTIC EXTENSION, ADAPTIVE TOKEN BUDGETING AND CONTEXT GOVERNANCE PROTOCOL
@@ -10,6 +11,7 @@ Supersedes: ULRP-EXT-SPEC-1.0.8, ULRP-EXT-SPEC-1.0.7, ULRP-EXT-SPEC-1.0.6,
             ULRP-EXT-SPEC-1.0.5, ULRP-EXT-SPEC-1.0.4, ULRP-EXT-SPEC-1.0.3,
             ULRP-EXT-SPEC-1.0.2, ULRP-EXT-SPEC-1.0.1, ULRP-EXT-SPEC-1.0.0
 ================================================================================
+```
 
 ## 0. CONVENZIONI, GERARCHIA DI DIPENDENZA, ASSIOMATICA E AMBITO OSSERVABILE
 
@@ -1519,6 +1521,9 @@ Un'implementazione conforme all'estensione DEVE superare tutti i seguenti 36 sce
 +---------------------+-------------------------------+-------------------------------+-----------------------+-------------------------+
 ```
 
+```text
 ================================================================================
 FINE SPECIFICA TECNICA NORMATIVA ULRP-EXT-SPEC-1.1.0 (FROZEN STANDARD)
 ================================================================================
+```
+

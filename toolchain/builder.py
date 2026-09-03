@@ -337,15 +337,31 @@ def build_static_site():
 
     specs_links = []
     if SPECS_DIR.exists():
-        for spec_dir in sorted(SPECS_DIR.iterdir()):
-            if spec_dir.is_dir():
-                spec_f = spec_dir / "SPECIFICATION.md"
-                if spec_f.exists():
-                    out_d = SITE_DIR / "specifications" / spec_dir.name
-                    out_d.mkdir(parents=True, exist_ok=True)
-                    with open(spec_f, "r", encoding="utf-8") as f: s_html = markdown_to_html(f.read())
-                    with open(out_d / "index.html", "w", encoding="utf-8") as f: f.write(wrap_page(spec_dir.name, s_html, "../../"))
-                    specs_links.append(f'<li><a href="{spec_dir.name}/index.html"><strong>{html.escape(spec_dir.name)}</strong></a></li>')
+        spec_files = sorted(
+            [p for p in SPECS_DIR.rglob("SPECIFICATION.md") if p.is_file() and not p.is_symlink()],
+            key=lambda x: x.relative_to(SPECS_DIR).as_posix()
+        )
+        for spec_f in spec_files:
+            rel_spec_dir = spec_f.parent.relative_to(SPECS_DIR).as_posix()
+            out_d = SITE_DIR / "specifications" / rel_spec_dir
+            out_d.mkdir(parents=True, exist_ok=True)
+            with open(spec_f, "r", encoding="utf-8") as f:
+                s_html = markdown_to_html(f.read())
+
+            depth = len(rel_spec_dir.split("/")) + 1
+            rel_root = "../" * depth
+
+            with open(out_d / "index.html", "w", encoding="utf-8") as f:
+                f.write(wrap_page(rel_spec_dir, s_html, rel_root))
+
+            sop_f = spec_f.parent / "SOP.md"
+            if sop_f.exists() and not sop_f.is_symlink():
+                with open(sop_f, "r", encoding="utf-8") as f:
+                    sop_html = markdown_to_html(f.read())
+                with open(out_d / "sop.html", "w", encoding="utf-8") as f:
+                    f.write(wrap_page(f"{rel_spec_dir} — SOP", sop_html, rel_root))
+
+            specs_links.append(f'<li><a href="{rel_spec_dir}/index.html"><strong>{html.escape(rel_spec_dir)}</strong></a></li>')
 
     specs_index = "<h1>Indice delle Specifiche Figlie</h1>"
     specs_index += "<ul>" + "\n".join(specs_links) + "</ul>" if specs_links else "<p>Nessuna specifica figlia archiviata.</p>"
