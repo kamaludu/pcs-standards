@@ -1,8 +1,8 @@
 {
-  "timestamp_utc": "2026-09-02T23:44:00Z",
-  "commit_sha": "636c4f889e8b8f4f4be32eba1ddf12d414fda90d",
+  "timestamp_utc": "2026-09-03T16:50:40Z",
+  "commit_sha": "2ea6d32fab88f1cd3ca02f55f4a66ac993b5ed8d",
   "runner_version": "pcs-builder-v12.7.3",
-  "merkle_root_v1": "c90a3f4c8042d2a2739d4a801966bfbf69e37273a6dc60621bab94126243853f",
+  "merkle_root_v1": "8b35ff19d4b5181f7ae5c95789b450068c89b1853c849bdd3059db2a37099e4d",
   "configuration_identity": "sha256:54dcf996a480d154867b0f0fce8575f2d0bd1139ef9d87a5a395d6806039b003",
   "evidence_result": "PASS",
   "gate_verdict": "RELEASE_GATE_PASS",
